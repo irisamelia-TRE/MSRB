@@ -1,0 +1,422 @@
+<section class="ma__page-header ">
+    <div name="title" class="ma__page-header__content">
+        <h1 class="ma__page-header__title">Government Retirement Calculator</h1>
+    </div>
+</section>
+
+<div class="ma__divider"></div><br/>
+
+<div class="main-content main-content--two" ng-show="model.invalid_error">
+    <p class="ma__emergency-alert">
+        <span class="ma__emergency-alert__message" style="padding-left: 20px; font-weight: bold;">{{model.invalid_error}}</span>
+    </p>
+</div>
+
+<div class="main-content main-content--two">
+    <form name="form">
+        <div>
+            <p>
+                I understand that the information and/or calculations
+                displayed on this site do not necessarily reflect the actual amount of my retirement allowance.
+                The results provided by this calculator are approximations and should not be considered
+                as the final determination of my retirement benefit. They should not be relied upon for planning
+                purposes.
+            </p>
+            <label for="checkbox-agree" class="ma__select-box__label"
+                   style="color: red; font-size: 24px; font-style: italic;" ng-show="model.agreement_error">
+                You must agree to the terms and conditions to use the calculator!</label>
+            <span class="ma__input-checkbox">
+                <input type="checkbox" value="checkbox" id="checkbox-agree" ng-model="model.data.agreement">
+                <label for="checkbox-agree">
+                    <span>I agree to the terms and conditions to using
+                        the calculator having entered service.
+                    </span>
+                </label>
+            </span>
+        </div>
+        <br/>
+
+        <div class="ma__input-group ">
+
+            <div class="ma__input-group__title">
+                I entered service BEFORE April 2, 2014.
+            </div>
+
+            <div class="ma__input-group__items ma__input-group__items--inline">
+
+                <div class="ma__input-group__item">
+                        <span class="ma__input-radio">
+                            <input type="radio" value="true" id="before_true" ng-init="model.data.before=true"
+                                   ng-checked="true" ng-model="model.data.before">
+                            <label for="before_true"><span>True</span></label>
+                        </span>
+                </div>
+
+                <div class="ma__input-group__item">
+                        <span class="ma__input-radio">
+                            <input type="radio" value="false" id="before_false" ng-model="model.data.before">
+                            <label for="before_false"><span>False</span></label>
+                        </span>
+                </div>
+
+            </div>
+
+            <!-- Tooltip from mayflower form page example -->
+            <div class="ma__tooltip">
+                <div class="ma__tooltip__inner">
+                    <input id="GUID378590287" class="ma__tooltip__control" aria-label="reform3" aria-hidden="true"
+                           type="checkbox">
+                    <label for="GUID378590287" class="ma__tooltip__open" aria-labelledby="GUID378590287"
+                           aria-hidden="true">
+                        Why is this necessary?
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                            <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 12.17a.84.84 0 0 1-.83-.84.83.83 0 1 1 1.67 0c0 .46-.38.84-.84.84zm1.3-3.96c-.6.65-.62 1.01-.62 1.46H7.35c0-.99.01-1.42.95-2.32.38-.36.69-.65.64-1.21-.04-.54-.48-.82-.9-.82-.48 0-1.03.35-1.03 1.35H5.67c0-1.6.94-2.64 2.4-2.64.68 0 1.29.23 1.7.64.37.38.57.91.56 1.53-.01.92-.57 1.53-1.02 2.01z"></path>
+                        </svg>
+                    </label>
+                    <section class="ma__tooltip__modal ma__tooltip__modal--below">
+                        <div class="ma__tooltip__container">
+                            <label for="GUID378590287" class="ma__tooltip__close" tabindex="-1"
+                                   aria-labelledby="GUID378590287" aria-hidden="true">Close</label>
+                            <div class="ma__tooltip__message">
+                                Pension Reform III, effective November 16, 2011,
+                                created a new benefit structure for individuals who
+                                became members of Massachusetts public
+                                retirement systems on or after April 2, 2012.
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+        </div>
+        <br/>
+
+        <div>
+            <section class="ma__select-box js-dropdown">
+                <div class="ma__select-box__field">
+                    <label for="age_months" class="ma__select-box__label">Enter your date of birth</label>
+                    <label for="age_months" class="ma__select-box__label"
+                           style="color: red; font-size: 18px; font-style: italic;" ng-show="model.DOB_error">
+                        DOB field is empty or missing a field, all fields are required!</label>
+                    <select id="age_months" type="number"
+                            class="ma__select-box__select js-dropdown-select "
+                            ng-model="model.data.age_month"
+                            ng-change="model.change_months_age(model.data)">
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                    <div class="ma__select-box__link">
+                        <span class="js-dropdown-link">{{model.display_months_age}}</span>
+                        <span class="ma__select-box__icon"></span>
+                    </div>
+                </div>
+            </section>
+            <section class="ma__select-box js-dropdown">
+                <div class="ma__select-box__field">
+                    <select id="age_days" type="number"
+                            class="ma__select-box__select js-dropdown-select "
+                            ng-model="model.data.age_days">
+                        <option ng-repeat="x in model.days_month" value="{{$index+1}}">{{$index+1}}</option>
+
+                    </select>
+                    <div class="ma__select-box__link">
+                        <span class="js-dropdown-link">{{model.data.age_days || "Day"}}</span>
+                        <span class="ma__select-box__icon"></span></div>
+                </div>
+            </section>
+
+        </div>
+
+        <span>
+            <input class="ma__input js-is-required"
+                   type="number" ng-model="model.data.age_years" min="1900" max="2200"
+                   placeholder="Year" data-type="text" style="width: 120px">
+        </span>
+
+        <br/>
+        <div name="expectedRetirement">
+            <section class="ma__select-box js-dropdown">
+                <label for="selectMonth" class="ma__select-box__label">Select the projected date of retirement:</label>
+                <label for="selectMonth" class="ma__select-box__label"
+                       style="color: red; font-size: 18px; font-style: italic;" ng-show="model.retire_error">
+                    Retirement date field is empty or missing a field, all fields is required!</label>
+                <div class="ma__select-box__field">
+                    <select id="selectMonth"
+                            class="ma__select-box__select js-dropdown-select "
+                            ng-change="model.change_display_month(model.data)"
+                            ng-model="model.data.retire_month">
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                    <div class="ma__select-box__link">
+                        <span class="js-dropdown-link">{{model.display_month}}</span>
+                        <span class="ma__select-box__icon"></span></div>
+                </div>
+
+            </section>
+
+            <section>
+                <input name="selectDay" type="number"
+                       class="ma__input js-is-required"
+                       placeholder="Day"
+                       ng-model="model.data.retire_day" min="1" max="31" style="width: 100px">
+                <input name="selectYear" type="number"
+                       class="ma__input js-is-required"
+                       placeholder="Year"
+                       ng-model="model.data.retire_year" min="1900">
+            </section>
+
+        </div>
+        <br/>
+        <div>
+            <label for="avg_salary" class="ma__label ma__label--required "
+                   ng-show="model.data.before || !model.data.after">
+                Enter the estimated average of your highest thirty-six consecutive months of annual regular
+                compensation:</label>
+            <label for="avg_salary" class="ma__label ma__label--required "
+                   ng-show="model.data.after && !model.data.before">
+                Enter the estimated average of your highest sixty consecutive months of annual regular
+                compensation:</label>
+            <label for="avg_salary" class="ma__select-box__label"
+                   style="color: red; font-size: 18px; font-style: italic;" ng-show="model.salary_error">
+                Salary field is empty, field is required!</label>
+            <input class="ma__input js-is-required" name="avg_salary" id="avg_salary"
+                   type="number" ng-model="model.data.compensation" min="0" max="2000000"
+                   style="width:300px"
+                   placeholder="0.00" data-type="text">
+        </div>
+        <br/>
+
+        <div>
+
+            <section class="ma__select-box js-dropdown">
+                <label for="groupClass" class="ma__select-box__label">Please select Group Classification:</label>
+                <label for="groupClass" class="ma__select-box__label"
+                       style="color: red; font-size: 18px; font-style: italic;" ng-show="model.group_error">
+                    Group is un-selected, field is required!</label>
+                <div class="ma__select-box__field">
+                    <select id="groupClass"
+                            class="ma__select-box__select js-dropdown-select "
+                            ng-change="model.change_display_group(model.data)"
+                            ng-model="model.data.group">
+                        <option value="1">Group 1</option>
+                        <option value="2">Group 2</option>
+                        <option value="4">Group 4</option>
+                    </select>
+                    <div class="ma__select-box__link">
+                        <span class="js-dropdown-link">{{model.display_group}}</span>
+                        <span class="ma__select-box__icon"></span></div>
+                </div>
+
+                <!-- Tooltip from mayflower form page example -->
+                <div class="ma__tooltip">
+                    <div class="ma__tooltip__inner">
+                        <input id="GUID378590289" class="ma__tooltip__control" aria-label="what are groups"
+                               aria-hidden="true" type="checkbox">
+                        <label for="GUID378590289" class="ma__tooltip__open" aria-labelledby="GUID378590289"
+                               aria-hidden="true">
+                            What is this?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                                <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 12.17a.84.84 0 0 1-.83-.84.83.83 0 1 1 1.67 0c0 .46-.38.84-.84.84zm1.3-3.96c-.6.65-.62 1.01-.62 1.46H7.35c0-.99.01-1.42.95-2.32.38-.36.69-.65.64-1.21-.04-.54-.48-.82-.9-.82-.48 0-1.03.35-1.03 1.35H5.67c0-1.6.94-2.64 2.4-2.64.68 0 1.29.23 1.7.64.37.38.57.91.56 1.53-.01.92-.57 1.53-1.02 2.01z"></path>
+                            </svg>
+                        </label>
+                        <section class="ma__tooltip__modal ma__tooltip__modal--below">
+                            <div class="ma__tooltip__container">
+                                <label for="GUID378590289" class="ma__tooltip__close" tabindex="-1"
+                                       aria-labelledby="GUID378590289" aria-hidden="true">Close</label>
+                                <div class="ma__tooltip__message">
+                                    <!-- https://www.mass.gov/service-details/group-classification-overview-msrb -->
+                                    <p>Group 1 - officials and general employees including clerical, administrative and
+                                        technical workers, laborers, mechanics, and all others not otherwise classified
+                                    <p>Group 2 - officials and general employees who are responsible for care, custody,
+                                        instruction, or
+                                        supervision of prisoners, persons with mental illnesses, or persons with
+                                        developmental disorders.
+                                    <p>Group 3 - certain public safety officers and officials, correction officers and
+                                        certain other correction positions
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+            </section>
+
+
+        </div>
+
+        <section class="ma__select-box js-dropdown">
+            <label for="years_served" class="ma__select-box__label">Enter your length of service in months and
+                years (including bought service)</label>
+            <label for="years_served" class="ma__select-box__label"
+                   style="color: red; font-size: 18px; font-style: italic;" ng-show="model.service_error">
+                Length of service is empty or missing a field, all fields are required!</label>
+            <div class="ma__select-box__field">
+                <select id="years_served"
+                        class="ma__select-box__select js-dropdown-select "
+                        ng-model="model.data.years">
+                    <option ng-repeat="n in model.array" value="{{$index+1}}">{{$index+1}}</option>
+
+                </select>
+                <div class="ma__select-box__link">
+                    <span class="js-dropdown-link">{{model.data.years || "Years Served"}}</span>
+                    <span class="ma__select-box__icon"></span></div>
+            </div>
+        </section>
+        <section class="ma__select-box js-dropdown">
+            <div class="ma__select-box__field">
+                <select id="months_served"
+                        class="ma__select-box__select js-dropdown-select "
+                        ng-model="model.data.months"
+                        ng-change="model.change_months_served(model.data)">
+                    <option value="">Months</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                </select>
+                <div class="ma__select-box__link">
+                    <span class="js-dropdown-link">{{model.months_served}}</span>
+                    <span class="ma__select-box__icon"></span></div>
+            </div>
+        </section>
+
+        <div>
+            <section class="ma__select-box js-dropdown">
+                <label for="veteran_status" class="ma__select-box__label">Are you a Military Veteran?</label>
+                <label for="veteran_status" class="ma__select-box__label"
+                       style="color: red; font-size: 18px; font-style: italic;" ng-show="model.veteran_error">
+                    Veteran status is un-selected, field is required!</label>
+                <div class="ma__select-box__field">
+                    <select id="veteran_status"
+                            class="ma__select-box__select js-dropdown-select "
+                            ng-change="model.veteran_check(model.data)"
+                            ng-model="model.data.veteran">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+
+                    </select>
+                    <div class="ma__select-box__link">
+                        <span class="js-dropdown-link">{{model.veteran_display}}</span>
+                        <span class="ma__select-box__icon"></span></div>
+                </div>
+            </section>
+
+            <div ng-show="model.veteran_yes">
+                Years Served
+                <input ng-model="model.data.veteran_years" min="1">
+            </div>
+        </div>
+
+        <div>
+            <label for="option_c" class="ma__label ma__label--required ">Please enter the age of the
+                beneficiary at your retirement date if calculating for Option C:</label>
+            <input class="ma__input js-is-required" name="option_c" id="option_c"
+                   type="number" ng-model="model.data.option_c" min="0" max="120"
+                   style="width:300px"
+                   placeholder="Age" data-type="text">
+        </div>
+        <br/>
+
+        <div>
+            <button type="button"
+                    class="ma__button   "
+                    ng-click="model.calculate(model.data)">
+                Submit
+            </button>
+        </div>
+        <br/>
+    </form>
+
+    <h3 class="ma__page-header__title">Pension Estimates</h3>
+    <!-- Tooltip from mayflower form page example -->
+    <div class="ma__tooltip">
+        <div class="ma__tooltip__inner">
+            <input id="GUID248590287" class="ma__tooltip__control" aria-label="what are retirement options"
+                   aria-hidden="true" type="checkbox">
+            <label for="GUID248590287" class="ma__tooltip__open" aria-labelledby="GUID248590287" aria-hidden="true">
+                What is this?
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 12.17a.84.84 0 0 1-.83-.84.83.83 0 1 1 1.67 0c0 .46-.38.84-.84.84zm1.3-3.96c-.6.65-.62 1.01-.62 1.46H7.35c0-.99.01-1.42.95-2.32.38-.36.69-.65.64-1.21-.04-.54-.48-.82-.9-.82-.48 0-1.03.35-1.03 1.35H5.67c0-1.6.94-2.64 2.4-2.64.68 0 1.29.23 1.7.64.37.38.57.91.56 1.53-.01.92-.57 1.53-1.02 2.01z"></path>
+                </svg>
+            </label>
+            <section class="ma__tooltip__modal ma__tooltip__modal--below">
+                <div class="ma__tooltip__container" style="width:800px">
+                    <label for="GUID248590287" class="ma__tooltip__close" tabindex="-1" aria-labelledby="GUID248590287"
+                           aria-hidden="true">Close</label>
+                    <div class="ma__tooltip__message">
+                        <p>Option A - Full retirement allowance, all benefits stop upon your death.
+                        <p>Option B - Reduced (1-5% less than Option A) retirement allowance, beneficiary receives lump
+                            sum payment of the balance of your annuity upon your death.
+                        <p>Option C - Reduced (approximately 7-15% less than Option A) retirement allowance. Upon your
+                            death, your designated beneficiary will be paid a monthly allowance for the remainder of his
+                            or her life. The survivor benefit will be equal to two-thirds of the allowance that was
+                            being paid to you at the time of your death.
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <table class="ma__table " name="results">
+        <thead>
+        <tr>
+            <th scope="col">Pension Fund</th>
+            <th scope="col">Estimated Annual</th>
+            <th scope="col">Estimated Monthly</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="">
+            <th data-label="Type" scope="row" rowspan="4">Option A</th>
+            <td data-label="annual_est">{{model.fund_A.toLocaleString() }}</td>
+            <td data-label="monthly_est">{{model.fund_A_month.toLocaleString() }}</td>
+        </tr>
+        </tbody>
+        <tbody>
+        <tr class="">
+            <th data-label="Type" scope="row" rowspan="4">Option B</th>
+        <tr class="is-offset">
+            <td data-label="annual_est">{{model.fund_B.toLocaleString() }}</td>
+            <td data-label="monthly_est">{{model.fund_B_month.toLocaleString() }}</td>
+        </tr>
+        </tbody>
+        <tbody>
+        <tr class="">
+            <th data-label="Type" scope="row" rowspan="4">Option C</th>
+            <td data-label="annual_est">{{model.fund_C.toLocaleString() }}</td>
+            <td data-label="monthly_est">{{model.fund_C_month.toLocaleString() }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
