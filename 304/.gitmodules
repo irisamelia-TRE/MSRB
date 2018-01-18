@@ -1,0 +1,3 @@
+[submodule "frontend-dev/app/static"]
+	path = frontend-dev/app/static
+	url = git@github.ccs.neu.edu:maxlever/304-static-prototype.git

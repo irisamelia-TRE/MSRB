@@ -1,0 +1,72 @@
+<main id="main-content" tabindex="-1" ng-controller="ResultsCtrl">
+  <div class="pre-content">
+
+
+    <section class="ma__page-header ">
+      <div class="ma__page-header__content">
+        <div class="ma__page-header__category">
+          MSRB
+        </div>
+        <h1 class="ma__page-header__title"><span class="visually-hidden">MSRB&nbsp;</span>Retirement Calculator</h1>
+      </div>
+
+    </section>
+  </div>
+  <div class="main-content main-content--two">
+    <div class="page-content">
+
+      <section class="ma__rich-text js-ma-rich-text">
+
+        <h3 class="ma__column-heading">Results</h3>
+
+        <p>{{resultsInfo}}</p>
+
+        <table class="ma__table ma__table--wide">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">{{optionA.name}}</th>
+              <th scope="col">{{optionB.name}}</th>
+              <th scope="col" ng-if="optionC.name">{{optionC.name}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="">
+              <th data-label="" scope="row">Your Annual Benefits</th>
+              <td data-label="Option A">${{optionA.benefits[0].amount}}</td>
+              <td data-label="Option B">${{optionB.benefits[0].amount}}</td>
+              <td data-label="Option C" ng-if="optionC.name">${{optionC.benefits[0].amount}}</td>
+            </tr>
+            <tr class="">
+              <td data-label="">Paid as</td>
+              <td data-label="Option A">${{optionA.benefits[1].amount}} / month</td>
+              <td data-label="Option B">${{optionB.benefits[1].amount}} / month</td>
+              <td data-label="Option C" ng-if="optionC.name">${{optionC.benefits[1].amount}} / month</td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr class="">
+              <th data-label="" scope="row">Beneficiary Annual Benefits</th>
+              <td data-label="Option A">N/A</td>
+              <td data-label="Option B">N/A</td>
+              <td data-label="Option C" ng-if="optionC.name">${{optionC.benefits[2].amount}}</td>
+            </tr>
+            <tr class="">
+              <td data-label="">Paid as</td>
+              <td data-label="Option A">N/A</td>
+              <td data-label="Option B">N/A</td>
+              <td data-label="Option C" ng-if="optionC.name">${{optionC.benefits[3].amount}} / month</td>
+            </tr>
+          </tbody>
+        </table>
+        <button ng-click="go()" type="submit" class="ma__button ma__button--small  " aria-label="">Change information</button>
+      </section>
+    </div>
+    <aside class="sidebar ">
+      
+    </aside>
+  </div>
+  <div class="post-content">
+
+  </div>
+</main>

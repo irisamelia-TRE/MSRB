@@ -1,0 +1,6 @@
+auto/
+*.aux
+*.log
+*~
+frontend-dev/node_modules
+frontend-dev/app/bower_components

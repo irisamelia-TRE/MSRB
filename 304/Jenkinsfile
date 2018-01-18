@@ -1,0 +1,24 @@
+node {
+    stage('Test') {
+        checkout scm
+        dir ('backend') {
+            sh 'mvn clean verify '
+            sh 'mvn sonar:sonar -Dsonar.host.url=http://128.31.24.224:9000'
+        }
+    }
+    stage('Deploy') {
+        switch(env.BRANCH_NAME) {
+            case 'master': env.DEPLOYMENT_ENVIRONMENT = 'prod'; break;
+            default: env.DEPLOYMENT_ENVIRONMENT = 'none';
+        }
+        if (env.DEPLOYMENT_ENVIRONMENT != 'none') {
+            checkout scm
+            echo 'Deploying'
+            withCredentials([file(credentialsId: 't304-aws-pem', variable: 'T304_AWS_PEM_PATH')]) {
+                sh 'cd deploy; chmod +x deploy.sh; chmod +x deploy_backend.sh; chmod +x deploy_frontend.sh; bash deploy.sh'
+            }
+        } else {
+            echo 'Not deploying'
+        }
+    }
+}

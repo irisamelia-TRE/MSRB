@@ -1,0 +1,27 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Retirement Calculator Backend</display-name>
+  <servlet>
+    <servlet-name>Backend</servlet-name>
+    <servlet-class>cs4500.t304.backend.CalculationEndpoint</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>Database</servlet-name>
+    <servlet-class>cs4500.t304.backend.DatabaseEndpoint</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Backend</servlet-name>
+    <url-pattern>/calculate</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>Database</servlet-name>
+    <url-pattern>/database</url-pattern>
+  </servlet-mapping>
+  
+</web-app>

@@ -1,0 +1,80 @@
+\documentclass{article}
+
+\title{Retirement Calculator Project Technology Usage Proposal}
+\author{Team 304}
+
+
+\usepackage{graphicx}
+\graphicspath{ {img/} }
+\usepackage{float}
+
+\setlength{\parskip}{1em}
+
+\begin{document}
+
+\maketitle
+
+\section*{Frontend Technology}
+
+For the frontend of the calculator, we plan to use angular js. 
+Angular js is a javascript framework which excels at creating
+static documents. We chose Angular js for two main reasons:
+the first is that it is easily extendable and the second is 
+that it will handle a lot of the workload for us.
+
+At a basic level, we will be using Angular js to create a
+form and a results page. However, the form can have several
+different views depending on what the user wants to find out.
+Using angular js, we can easily handle that rendering logic.
+
+In later version of our product, we want to be able to pull
+some, if not all, the data from a pre-existing database. In
+order to do this, we need to make sure the user is 
+authenticated. However, since there's also a non-authenticated
+workflow for this site, we need to be able to differentiate
+and handle both flows. Using Angular js, we can easily handle
+authorized and non-authorized workflows via the secure and
+non-secure routes.
+
+We will send and receive data from an exposed API created 
+by our backend.
+
+\section*{Backend Technology}
+
+In order to implement the backend to the calculator
+we plan to use Java Enterprise Edition (Java EE).
+Java EE is an exceedingly mature technology,
+with a wealth of resources and compatible software available.
+Furthermore,
+in this case specifically,
+preexisting technology related to the course is set up for Java
+which will reduce the overhead from technology choice.
+That preexisting technology is Jenkins and JBoss,
+a CI solution and an application server.
+We will be using Jenkins to manage builds and testing,
+and JBoss to host our application.
+
+The backend project will be structured as some number of Java servlets,
+the business logic,
+and code to connect to the database.
+To connect to the database we will use a JDBC driver for PostgreSQL.
+We will use Maven to build the project.
+
+\section*{Database}
+
+In order to provide the database needed for development of the calculator
+we will use PostgreSQL on AWS.
+These technologies are all mature and very powerful,
+and specifically chosen (from among similar technologies)
+because of previous experience on the team in using them.
+That previous experience will allow us
+to deliver more value to the client
+(as dicussed in the Backend Technology section)
+by minimizing startup costs.
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

@@ -1,0 +1,261 @@
+<main class="ma__form-page" id="main-content" tabindex="-1" ng-controller="FormCtrl">
+    <div class="pre-content">
+        <section class="ma__page-header ">
+            <div class="ma__page-header__content">
+                <h1 class="ma__page-header__title">Retirement Calculator</h1>
+                <div class="ma__page-header__sub-title">{{introText}}</div>
+            </div>
+        </section>
+    </div>
+    <div class="main-content main-content--two">
+        <div class="page-content">
+            <form class="ma__form-page">
+                <div class="ma__error-list js-error-list" tabindex="-1">
+                    <div class="ma__error-list__container">
+                        <div class="ma__error-list__header">
+                            <span class="ma__error-list__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#cd0d0d" d="M0 12a12.01 12.01 0 0 0 24 0 12.01 12.01 0 0 0-24 0zm12 7.85a.93.93 0 0 1-.92-.93V18a.92.92 0 1 1 1.85 0v.92c0 .51-.42.93-.93.93zm0-4.7a.92.92 0 0 1-.92-.92V5.08c0-.51.41-.93.92-.93s.92.42.92.93v9.15c0 .51-.41.92-.92.92z"/></svg>
+                            </span>
+              <span class="ma__error-list__title">Sorry, please correct the indicated errors</span>
+            </div>
+            <ul class="ma__error-list__messages">
+              <li class="ma__error-list__message calc-dates">
+                <label class="ma__error-list__label" for="calc-dates" aria-label="">Retirement date cannot be before date of birth</label>
+              </li>
+              <li class="ma__error-list__message calc-dob">
+                <label class="ma__error-list__label" for="calc-dob" aria-label="">Please fix your date of birth field</label>
+              </li>
+              <li class="ma__error-list__message calc-dor">
+                <label class="ma__error-list__label" for="calc-dor" aria-label="">Please fix your retirement date field</label>
+              </li>
+              <li class="ma__error-list__message calc-earn">
+                <label class="ma__error-list__label" for="calc-earn" aria-label="">Please fix earnings field</label>
+              </li>
+              <li class="ma__error-list__message calc-years">
+                <label class="ma__error-list__label" for="calc-years" aria-label="">Please fix years field</label>
+              </li>
+              <li class="ma__error-list__message calc-months">
+                <label class="ma__error-list__label" for="calc-months" aria-label="">Please fix months field</label>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <h2 class="ma__comp-heading" tabindex="-1"></h2>
+        <fieldset>
+          <input ng-model="user.ssn" class="ma__input js-is-required" name="ssn" id="calc-ssn" type="text" placeholder="" data-type="text" style="width: 166px" />
+          <button ng-click="getInfo()" class="ma__button ma__button--small  " aria-label="">Get Info</button>
+          <label id="ssn_confirmation" for="ssn" aria-label="" style="display:none; width: 140px;font-size: 12px;">Retrieved user information!</label>
+        </fieldset>
+        <fieldset>
+          <div class="ma__input-group ">
+            <div class="ma__input-group__title">
+              {{formLabels.pre2012}}
+            </div>
+            <div class="ma__input-group__items ma__input-group__items--inline">
+              <div class="ma__input-group__item">
+                <span class="ma__input-radio">
+                                    <input name="2012-radio" type="radio" value="yes" id="2012-radio-yes" ng-model="user.before2012" ng-value=true>
+                                    <label for="2012-radio-yes"><span>Yes</span></label>
+                </span>
+              </div>
+              <div class="ma__input-group__item">
+                <span class="ma__input-radio">
+  <input name="2012-radio" type="radio" value="no" id="2012-radio-no" ng-model="user.before2012" ng-value=false >
+  <label for="2012-radio-no"><span>No</span></label>
+                </span>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="ma__input-group ">
+            <div class="ma__input-group__title">
+              {{formLabels.vet}}
+            </div>
+            <div class="ma__input-group__items ma__input-group__items--inline">
+              <div class="ma__input-group__item">
+                <span class="ma__input-radio">
+  <input name="vet-radio" type="radio" value="yes" id="vet-radio-yes" ng-model="user.militaryVeteran" ng-value=true>
+  <label for="vet-radio-yes"><span>Yes</span></label>
+                </span>
+              </div>
+              <div class="ma__input-group__item">
+                <span class="ma__input-radio">
+  <input name="vet-radio" type="radio" value="no" id="vet-radio-no" ng-model="user.militaryVeteran" ng-value=false >
+  <label for="vet-radio-no"><span>No</span></label>
+                </span>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <label for="calc-dob">{{formLabels.dob}}</label>
+          <input ng-model="dayOfBirth" class="ma__input-date js-input-date js-is-required" name="calc-dob-input" id="calc-dob" type="date" placeholder="" data-type="date" data-restrict="" required />
+          <label for="calc-dor">{{formLabels.dor}}</label>
+          <input ng-model="dayOfRetirement" class="ma__input-date js-input-date js-is-required" name="calc-dor-input" id="calc-dor" type="date" placeholder="" data-type="date" data-restrict="" required />
+        </fieldset>
+        <fieldset>
+          <div class="ma__input-group ">
+            <div class="ma__input-group__title">
+              {{formLabels.group}}
+            </div>
+            <div class="ma__input-group__items ma__input-group__items--inline">
+              <div class="ma__input-group__item">
+                <span class="ma__input-radio">
+  <input ng-model="user.groupNumber" name="group-radio" type="radio" value="1" id="group-radio-1" checked>
+  <label for="group-radio-1"><span>1</span></label>
+                </span>
+              </div>
+              <div class="ma__input-group__item">
+                <span class="ma__input-radio">
+  <input ng-model="user.groupNumber" name="group-radio" type="radio" value="2" id="group-radio-2" >
+  <label for="group-radio-2"><span>2</span></label>
+                </span>
+              </div>
+              <div class="ma__input-group__item">
+                <span class="ma__input-radio">
+  <input ng-model="user.groupNumber" name="group-radio" type="radio" value="3" id="group-radio-3" >
+  <label for="group-radio-3"><span>3</span></label>
+                </span>
+              </div>
+              <div class="ma__input-group__item">
+                <span class="ma__input-radio">
+  <input ng-model="user.groupNumber" name="group-radio" type="radio" value="4" id="group-radio-4" >
+  <label for="group-radio-4"><span>4</span></label>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="ma__tooltip">
+            <div class="ma__tooltip__inner">
+              <input id="GUID2345" type="checkbox" class="ma__tooltip__control" aria-label="what is this" aria-hidden="true" />
+              <label for="GUID2345" class="ma__tooltip__open" aria-labelledby="GUID2345" aria-hidden="true">{{tooltipText}}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 12.17a.84.84 0 0 1-.83-.84.83.83 0 1 1 1.67 0c0 .46-.38.84-.84.84zm1.3-3.96c-.6.65-.62 1.01-.62 1.46H7.35c0-.99.01-1.42.95-2.32.38-.36.69-.65.64-1.21-.04-.54-.48-.82-.9-.82-.48 0-1.03.35-1.03 1.35H5.67c0-1.6.94-2.64 2.4-2.64.68 0 1.29.23 1.7.64.37.38.57.91.56 1.53-.01.92-.57 1.53-1.02 2.01z"/></svg>
+                            </label>
+              <section class="ma__tooltip__modal ma__tooltip__modal--below">
+                <div class="ma__tooltip__container">
+                  <label for="GUID2345" class="ma__tooltip__close" tabindex="-1" aria-labelledby="GUID2345" aria-hidden="true">Close</label>
+                  <div class="ma__tooltip__message">
+                    <h6>Group 1:</h6>
+                    <p>{{groupInfo.group1}}</p>
+                    <h6>Group 2:</h6>
+                    <p>{{groupInfo.group2}}</p>
+                    <h6>Group 3:</h6>
+                    <p>{{groupInfo.group3}}</p>
+                    <h6>Group 4:</h6>
+                    <p>{{groupInfo.group4}}</p>
+                    <p><a href="https://www.mass.gov/service-details/group-classification-overview-msrb">More info here.</a></p>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <label for="calc-ben-dob">{{formLabels.beneficiary}}<small>(optional)</small></label>
+          <input ng-model="beneficiaryDoB" class="ma__input-date js-input-date " name="calc-ben-dob-input" id="calc-ben-dob" type="date" placeholder="" data-type="date" data-restrict="" />
+          <div class="ma__tooltip">
+            <div class="ma__tooltip__inner">
+              <input id="GUID567" type="checkbox" class="ma__tooltip__control" aria-label="what is this" aria-hidden="true" />
+              <label for="GUID567" class="ma__tooltip__open" aria-labelledby="GUID567" aria-hidden="true">{{tooltipText}}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 12.17a.84.84 0 0 1-.83-.84.83.83 0 1 1 1.67 0c0 .46-.38.84-.84.84zm1.3-3.96c-.6.65-.62 1.01-.62 1.46H7.35c0-.99.01-1.42.95-2.32.38-.36.69-.65.64-1.21-.04-.54-.48-.82-.9-.82-.48 0-1.03.35-1.03 1.35H5.67c0-1.6.94-2.64 2.4-2.64.68 0 1.29.23 1.7.64.37.38.57.91.56 1.53-.01.92-.57 1.53-1.02 2.01z"/></svg>
+                            </label>
+              <section class="ma__tooltip__modal ma__tooltip__modal--below">
+                <div class="ma__tooltip__container">
+                  <label for="GUID567" class="ma__tooltip__close" tabindex="-1" aria-labelledby="GUID567" aria-hidden="true">Close</label>
+                  <div class="ma__tooltip__message">
+                    {{formLabels.beneficiaryInfo}}
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <label for="calc-earn" class="ma__label ma__label--required" ng-switch on="user.before2012">
+                        <span ng-switch-when="false">
+                            {{formLabels.compensationPre2012}}
+                        </span>
+                        <span ng-switch-default>
+                            {{formLabels.compensationPost2012}}
+                        </span>
+                    </label>
+          <div class="ma__error-msg">you did not type something</div>
+          <i class="ma__input-prefix">$</i>
+          <input ng-model="user.salaryAverage" class="ma__input js-is-required" name="calc-earn-input" id="calc-earn" type="number" placeholder="" data-type="number" required />
+
+        </fieldset>
+        <fieldset>
+          <fieldset class="ma__divided-inputs">
+            <legend class="ma__legend ma__legend--required">{{formLabels.service}}</legend>
+            <div class="ma__divided-inputs__input">
+              <label for="calc-years" class="ma__label ma__label--required ">Years</label>
+              <div class="ma__error-msg">missing years</div>
+              <input ng-model="yearsOfService" class="ma__input js-is-required" name="calc-years" id="calc-years" type="number" placeholder="" data-type="text" style="width: 85px" required />
+            </div>
+            <div class="ma__divided-inputs__input">
+              <label for="calc-months" class="ma__label ma__label--required ">Months</label>
+              <div class="ma__error-msg">missing months</div>
+              <input ng-model="monthsOfService" class="ma__input js-is-required" name="calc-months" id="calc-months" type="number" placeholder="" data-type="text" style="width: 85px" required />
+            </div>
+          </fieldset>
+          <div class="ma__tooltip">
+            <div class="ma__tooltip__inner">
+              <input id="GUID789" type="checkbox" class="ma__tooltip__control" aria-label="what is this" aria-hidden="true" />
+              <label for="GUID789" class="ma__tooltip__open" aria-labelledby="GUID789" aria-hidden="true">{{tooltipText}}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 12.17a.84.84 0 0 1-.83-.84.83.83 0 1 1 1.67 0c0 .46-.38.84-.84.84zm1.3-3.96c-.6.65-.62 1.01-.62 1.46H7.35c0-.99.01-1.42.95-2.32.38-.36.69-.65.64-1.21-.04-.54-.48-.82-.9-.82-.48 0-1.03.35-1.03 1.35H5.67c0-1.6.94-2.64 2.4-2.64.68 0 1.29.23 1.7.64.37.38.57.91.56 1.53-.01.92-.57 1.53-1.02 2.01z"/></svg>
+                            </label>
+              <section class="ma__tooltip__modal ma__tooltip__modal--below">
+                <div class="ma__tooltip__container">
+                  <label for="GUID789" class="ma__tooltip__close" tabindex="-1" aria-labelledby="GUID789" aria-hidden="true">Close</label>
+                  <div class="ma__tooltip__message">
+                    {{formLabels.serviceInfo}}
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <button ng-click="submit()" type="submit" class="ma__button ma__button--small  " aria-label="">Calculate</button>
+        </fieldset>
+      </form>
+    </div>
+    <aside class="sidebar ">
+      <section class="ma__contact-list ">
+        <h2 class="ma__sidebar-heading">Contact</h2>
+        <section class="ma__contact-us  ">
+          <h3 class="ma__column-heading">
+                      Massachusetts State Retirement Board (MSRB)
+                    </h3>
+          <div class="ma__contact-us__content js-accordion-content">
+            <div class="ma__contact-group">
+              <h4 class="ma__contact-group__name">
+                              <svg aria-hidden="true" id="SvgjsSvg1014" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="33" height="37" viewBox="0 0 33 37"><defs id="SvgjsDefs1015"></defs><path id="SvgjsPath1016" d="M412.841 2040.51C401.798 2045.57 384.657 2012.19 395.451 2006.56L398.60900000000004 2005L403.84400000000005 2015.23L400.72300000000007 2016.77C397.44200000000006 2018.54 404.27600000000007 2031.91 407.63200000000006 2030.28C407.7680000000001 2030.22 410.7150000000001 2028.77 410.72600000000006 2028.76L416.0040000000001 2038.96C415.9920000000001 2038.97 413.02200000000005 2040.43 412.84100000000007 2040.51ZM413.24 2011.28C415.564 2011.98 417.62600000000003 2013.56 418.87 2015.86C420.115 2018.1699999999998 420.309 2020.76 419.616 2023.09L416.926 2022.29C417.413 2020.6499999999999 417.275 2018.83 416.39799999999997 2017.2C415.52399999999994 2015.5800000000002 414.073 2014.47 412.436 2013.98ZM411.838 2016C412.956 2016.33 413.95000000000005 2017.1 414.548 2018.21C415.148 2019.32 415.242 2020.56 414.908 2021.69L410.535 2020.38ZM413.841 2009.26C416.681 2010.11 419.2 2012.04 420.722 2014.86C422.24199999999996 2017.6799999999998 422.479 2020.85 421.63399999999996 2023.6899999999998L424.39199999999994 2024.5199999999998C425.44899999999996 2020.9599999999998 425.15399999999994 2017.0099999999998 423.2509999999999 2013.4899999999998C421.3539999999999 2009.9699999999998 418.20899999999995 2007.5599999999997 414.66399999999993 2006.4999999999998Z " transform="matrix(1,0,0,1,-392,-2005)"></path></svg>      <span>Phone</span>
+                            </h4>
+              <div class="ma__contact-group__item">
+                <span class="ma__contact-group__label">Main:</span>
+                <a href="tel:+16173677770" class="ma__content-link ma__content-link--phone">(617) 367-7770</a>
+              </div>
+            </div>
+            <div class="ma__contact-group">
+              <h4 class="ma__contact-group__name">
+      <svg aria-hidden="true" id="SvgjsSvg1011" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="36" height="30" viewBox="0 0 36 30"><defs id="SvgjsDefs1012"></defs><path id="SvgjsPath1013" d="M424 1674L394 1674L394 1693.5L424 1693.5ZM421 1690.5L397 1690.5L397 1677L421 1677ZM424 1695L394 1695L391 1704L427 1704ZM405.658 1702.5L406.357 1701L411.64300000000003 1701L412.34200000000004 1702.5Z " transform="matrix(1,0,0,1,-391,-1674)"></path></svg>      <span>Online</span>
+    </h4>
+              <div class="ma__contact-group__item">
+                <span class="ma__decorative-link">
+                                  <a
+                                    href="mailto:srb@tre.state.ma.us"
+                                    class="js-clickable-link"
+                                    title="">srb@tre.state.ma.us&nbsp;<svg aria-hidden="true" id="SvgjsSvg1000" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="16" height="18" viewBox="0 0 16 18"><defs id="SvgjsDefs1001"></defs><path id="SvgjsPath1007" d="M983.721 1887.28L983.721 1887.28L986.423 1890L986.423 1890L986.423 1890L983.721 1892.72L983.721 1892.72L978.318 1898.17L975.617 1895.45L979.115 1891.92L971.443 1891.92L971.443 1888.0700000000002L979.103 1888.0700000000002L975.617 1884.5500000000002L978.318 1881.8300000000002Z " transform="matrix(1,0,0,1,-971,-1881)"></path></svg></a>
+                                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+    </aside>
+  </div>
+  <div class="post-content">
+  </div>
+</main>
