@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pension Calculator</title>
+    <!-- <script src="https://unpkg.com/vue"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/form.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link href="/css/styles.css" rel='stylesheet' type='text/css'>
+    <link href="/css/mayflowerstyles.css" rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+    <div class="output-navbar">
+    </div>
+    <div class="header-div">
+      <section>
+        <div class="ma__header__logo">
+          <div class="ma__site-logo">
+            <a href="/" title="Mass.gov home page">
+              <img src="http://mayflower.digital.mass.gov/assets/images/pilot-logo.png" alt="Mass.gov" width="164" height="75">
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="title-div">
+      <section>
+        <h2>Mass Retirement Calculator</h2>
+      </section>
+    </div>
+    <form id="form">
+        <ul id="progressbar">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <fieldset id="agree-slide" class="section">
+            <h3 class="ma__comp-heading">Welcome!</h3>
+            <p>I understand that the information and/or calculations displayed on this site do not necessarily reflect the actual amount of my retirement allowance. The results provided by this calculator are approximations and should not be considered as
+                the final determination of my retirement benefit. They should not be relied upon for planning purposes.</p>
+
+            <input id="agree" type="checkbox" name="agree">
+            <label for="checkbox">I agree, continue filling out form</label>
+            <button id="postme" type="button" class="submit next btn--link">Next</button>
+            <div class="error-message">
+                <p>You must agree to continue.</p>
+            </div>
+        </fieldset>
+        <fieldset class="section">
+
+            <h3 class="ma__comp-heading">Date of Birth</h3>
+            <p>Please enter your date of birth.</p>
+            <input id="dob" type="date" name="dob" required>
+
+
+            <button type="button" class="previous btn--link">Previous</button>
+            <button type="button" class="next submit btn--link">Next</button>
+            <div class="error-message">
+                <p>You must fill out all fields.</p>
+            </div>
+        </fieldset>
+
+        <fieldset class="section">
+
+            <h3 class="ma__comp-heading">Service Start Date</h3>
+            <p>Please enter the date on which you began service. If you don't know the exact date, make your best guess.</p>
+            <input id="ssd" type="date" name="ssd">
+            <button type="button" class="previous btn--link">Previous</button>
+            <button type="button" class="next submit btn--link">Next</button>
+
+            <div class="error-message">
+                <p>You must fill out all fields.</p>
+            </div>
+        </fieldset>
+
+        <fieldset class="section">
+
+            <h3 class="ma__comp-heading">Anticipated Date of Retirement</h3>
+            <p>Please enter the date on which you plan to retire. If you don't know the exact date, make your best guess.</p>
+            <input id="adr" type="date" name="adr">
+
+            <h3 class="ma__comp-heading">Estimated Total Number Years of Service</h3>
+            <p>Enter your estimated total number of years of creditable service, including any purchased service or may be eligible to purchase, as of your anticipated date of retirement</p>
+            <input id="eys" type="number" name="eys">
+
+            <button type="button" class="previous btn--link">Previous</button>
+            <button type="button" class="next submit btn--link">Next</button>
+            <div class="error-message">
+                <p>You must fill out all fields.</p>
+            </div>
+        </fieldset>
+        <fieldset class="section">
+
+            <h3 class="ma__comp-heading">Annual regular compensation</h3>
+            <p>Enter the estimated average of your highest thirty-six consecutive months of annual regular compensation.</p>
+            <input id="arc" type="number" name="arc">
+
+            <button type="button" class="previous btn--link">Previous</button>
+            <button type="button" class="next submit btn--link">Next</button>
+            <div class="error-message">
+                <p>You must fill out all fields.</p>
+            </div>
+        </fieldset>
+        <fieldset class="section">
+
+            <h3 class="ma__comp-heading">Group Number</h3>
+            <p>Your position, occupation, and the duties you perform determine your group classifcation. The group classification applicable to your specific position at the time of retirement may be reviewed by the State Retirement Board for determination
+                pursuant to its Group Classifcation Policy.</p><br>
+            <h5>Group 1</h5>
+            <p>Members are officials and general employees including clerical, administrative and technical workers, laborers, mechanics, and all others not otherwise classified.
+            </p>
+            <input id="group-1" type="radio" name="group" value="1"> Choose Group 1<br>
+            <h5>Group 2</h5>
+            <p>Members in this group include probation officers, court officers, certain correctional positions whose major duties require them to have the care, custody, instruction or supervision of prisoners, and certain positions who provide direct care,
+                custody, instruction or supervision of persons with mental illness or developmental disabilities.
+            </p>
+            <input id="group-2" type="radio" name="group" value="2"> Choose Group 2<br>
+            <h5>Group 4</h5>
+            <p>Members include certain public safety officers and officials, correction officers and certain other correction positions, and parole officers or parole supervisors. </p>
+            <input id="group-4" type="radio" name="group" value="4"> Choose Group 4<br>
+
+            <button type="button" class="previous btn--link">Previous</button>
+            <button type="button" class="next submit btn--link">Next</button>
+            <div class="error-message">
+                <p>You must fill out all fields.</p>
+            </div>
+        </fieldset>
+        <fieldset class="section">
+
+            <h3 class="ma__comp-heading">Veteran Status</h3>
+            <input id="veteran" type="radio" name="veteran" value="veteran"> Veteran<br>
+            <input id="non-veteran" type="radio" name="veteran" value="non-veteran"> Non-Veteran<br>
+
+            <button type="button" class="previous btn--link">Previous</button>
+            <button type="button" class="next submit btn--link">Next</button>
+            <div class="error-message">
+                <p>You must fill out all fields.</p>
+            </div>
+        </fieldset>
+        <fieldset class="section">
+            <h4>OPTIONAL: Option C Birthdate</h4>
+            <p> If you are interested in estimating your benefits under Option C, enter the birthday of your Option C beneficiary. Your Option C beneficiary must be your spouse, child, sibling, parent or former spouse who has not remarried.</p>
+            <input id="oc-date" type="date" name="oc-date">
+            <button type="button" class="previous btn--link">Previous</button>
+            <button type="button" onclick="location.href='output.html';" class="submit btn--link">Submit</button>
+            <div class="error-message">
+                <p>You must fill out all fields.</p>
+            </div>
+        </fieldset>
+    </form>
+</body>
+
+</html>

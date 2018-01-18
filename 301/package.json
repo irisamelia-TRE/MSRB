@@ -1,0 +1,32 @@
+{
+  "name": "301",
+  "version": "1.0.0",
+  "description": "section 3 team 1 Max, Mike, Sabrina, Emily, Kevin",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc mocha",
+    "start": "node app.js --presets es2015"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.ccs.neu.edu/CS4500/301.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "2.7.1",
+    "express": "^4.16.2",
+    "fetch": "^1.1.0",
+    "mongodb": "^2.2.33",
+    "mongoose": "^4.12.3",
+    "node-import": "0.9.2",
+    "nyc": "^11.3.0",
+    "request": "2.83.0",
+    "vue": "^2.5.2"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0",
+    "mocha": "^4.0.1"
+  }
+}

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Retirement</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/output.js"></script>
+  <link href="/css/styles.css" rel='stylesheet' type='text/css'>
+  <link href="/css/mayflowerstyles.css" rel='stylesheet' type='text/css'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+</head>
+<body>
+<div id="app">
+  <div class="output-wrapper">
+    <div class="output-navbar">
+    </div>
+    <div class="header-div">
+      <section>
+        <div class="ma__header__logo">
+          <div class="ma__site-logo">
+            <a href="/" title="Mass.gov home page">
+              <img src="http://mayflower.digital.mass.gov/assets/images/pilot-logo.png" alt="Mass.gov" width="164" height="75">
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="title-div">
+      <section>
+        <h1>Your Retirement</h1>
+      </section>
+    </div>
+    <section>
+      <div class="col-left">
+        <div class="centered">
+          <form>
+            <div class="input-container">
+                <h4 class="ma__comp-heading" tabindex="-1">Anticipated Date of Retirement</h4>
+                <input id="adr" type="date" name="adr">
+            </div>
+            <div>
+              <h4 class="ma__comp-heading" tabindex="-1">Estimated Number of Years of Service</h4>
+              <input id="eys" name="eys" type="text" v-bind:placeholder="YOS" />
+            </div>
+            <div class="input-container">
+              <h4 class="ma__comp-heading" tabindex="-1">Average Salary Over 36 Months</h4>
+              <input id="arc" name="arc" type="text" v-bind:placeholder="averageSalary" />
+            </div>
+          </form>
+          <form>
+            <div class="input-container">
+              <h4 class="ma__comp-heading" tabindex="-1">Optional: Beneficiary Date of Birth</h4>
+              <input id="oc-date" type="date" name="oc-date">
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-right">
+        <div class="centered">
+          <canvas id="myChart" width="300" height="200"></canvas>
+          <button class="button btn--link" style="padding-bottom: 0;" onclick="zoomIn();"><i class="material-icons md-36" width=32>zoom_in</i></button>
+          <button class="button btn--link" style="padding-bottom: 0;" onclick="zoomOut();"><i class="material-icons md-36" width=32>zoom_out</i></button>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+</body>
+<!-- <script>
+new Vue({
+    el: '#app',
+    data: {
+        DOR: '10/01/20',
+        YOS: '10 years',
+        averageSalary : '$75000',
+        DOB : '01/01/60',
+        BDOB : '01/01/80'
+
+    }
+});
+</script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+<script src="js/calc.js" type="text/javascript"></script>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script>
+
+  //handle updating on the forms
+
+  $("#adr").change(function() {
+    localStorage.setItem("adr", $("#adr")[0].value);
+    console.log(window.myLine.data);
+    if(window.myLine.data.zoomedIn) {
+      zoomIn();
+    } else {
+      zoomOut();
+    }
+  });
+
+  $("#eys").change(function() {
+    localStorage.setItem("eys", $("#eys")[0].value);
+    if(window.myLine.data.zoomedIn) {
+      zoomIn();
+    } else {
+      zoomOut();
+    }
+  });
+
+  $("#arc").change(function() {
+    localStorage.setItem("arc", $("#arc")[0].value);
+    if(window.myLine.data.zoomedIn) {
+      zoomIn();
+    } else {
+      zoomOut();
+    }
+  });
+
+  $("#oc-date").change(function() {
+    localStorage.setItem("oc-date", $("#oc-date")[0].value);
+    if(window.myLine.data.zoomedIn) {
+      zoomIn();
+    } else {
+      zoomOut();
+    }
+  });
+
+
+  function makeData(data, option, range, interval) {
+    var resultArray = [];
+    const eys = data.eys;
+    for(var i = 1; i <= range; i=i+interval) {
+      resultArray.push(calculate(Object.assign(data, { eys: eys - 6 + i}))[option])
+    }
+
+    return resultArray;
+  }
+
+  function makeLabels(year, range, interval) {
+    var resultArray = [];
+    for(var i = 1; i <= range; i=i+interval) {
+      resultArray.push(year - 6 + i)
+    }
+    return resultArray;
+  }
+
+  window.onload = initialCreate;
+
+  function zoomIn() {
+    window.myLine.data.zoomedIn = true;
+    localStorage = window.localStorage;
+
+    const eys = Number(localStorage.getItem("eys"));
+    const dob = localStorage.getItem("dob");
+    const group = localStorage.getItem("group");
+    const arc = localStorage.getItem("arc");
+    const adr = new Date(localStorage.getItem("adr"));
+    const ssd = new Date(localStorage.getItem(("ssd")));
+
+    const dataSetA = makeData({eys, dob: new Date(dob), group, arc, ssd}, 'optionA', 12, 0.084);
+    const dataSetB = makeData({eys, dob: new Date(dob), group, arc, ssd}, 'optionB', 12, 0.084);
+    const dataSetC = makeData({eys, dob: new Date(dob), group, arc, ssd}, 'optionC', 12, 0.084);
+
+    const labels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    window.myLine.data.labels = labels;
+    window.myLine.data.datasets.forEach((dataset) => {
+        if(dataset.label == "Option A") {
+          dataset.data = dataSetA;
+        }
+        if(dataset.label == "Option B") {
+          dataset.data = dataSetB;
+        }
+        if(dataset.label == "Option C") {
+          dataset.data = dataSetC;
+        }
+    });
+    window.myLine.update();
+  }
+
+  function zoomOut() {
+      window.myLine.data.zoomedIn = false;
+      localStorage = window.localStorage;
+
+      const eys = Number(localStorage.getItem("eys"));
+      const dob = localStorage.getItem("dob");
+      const group = localStorage.getItem("group");
+      const arc = localStorage.getItem("arc");
+      const adr = new Date(localStorage.getItem("adr"));
+      const ssd = new Date(localStorage.getItem(("ssd")));
+
+      const dataSetA = makeData({eys, dob: new Date(dob), group, arc, ssd}, 'optionA', 12, 1);
+      const dataSetB = makeData({eys, dob: new Date(dob), group, arc, ssd}, 'optionB', 12, 1);
+      const dataSetC = makeData({eys, dob: new Date(dob), group, arc, ssd}, 'optionC', 12, 1);
+
+      const labels = makeLabels(Number(adr.getFullYear()), 12, 1);
+      window.myLine.data.labels = labels;
+      window.myLine.data.datasets.forEach((dataset) => {
+        if(dataset.label == "Option A") {
+          dataset.data = dataSetA;
+        }
+        if(dataset.label == "Option B") {
+          dataset.data = dataSetB;
+        }
+        if(dataset.label == "Option C") {
+          dataset.data = dataSetC;
+        }
+      });
+      window.myLine.update();
+  }
+
+  function initialCreate() {
+      localStorage = window.localStorage;
+
+      const eys = Number(localStorage.getItem("eys"));
+      const dob = localStorage.getItem("dob");
+      const group = localStorage.getItem("group");
+      const arc = localStorage.getItem("arc");
+      const adr = new Date(localStorage.getItem("adr"));
+      const ssd = new Date(localStorage.getItem(("ssd")));
+
+      const dataSetA = makeData({eys, dob: new Date(dob), group, arc, ssd}, 'optionA', 12, 1);
+      const dataSetB = makeData({eys, dob: new Date(dob), group, arc, ssd}, 'optionB', 12, 1);
+      const dataSetC = makeData({eys, dob: new Date(dob), group, arc, ssd}, 'optionC', 12, 1);
+
+      const labels = makeLabels(Number(adr.getFullYear()), 12, 1);
+      makeChart(dataSetA, dataSetB, dataSetC, labels, adr.getFullYear());
+  }
+
+  function makeChart(dataSetA, dataSetB, dataSetC, labels, title) {
+    
+          var config = {
+              type: 'line',
+              data: {
+                  zoomedIn: false,
+                  labels,
+                  datasets: [
+                    {
+                      label: "Option A",
+                      backgroundColor: "#2196F3",
+                      borderColor: "#2196F3",
+                      data: dataSetA,
+                      fill: false,
+                    }, //put more data here
+                    {
+                      label: "Option B",
+                      backgroundColor: "#4CAF50",
+                      borderColor: "#4CAF50",
+                      data: dataSetC,
+                      fill: false,
+                    }, //put more data here
+                    {
+                      label: "Option C",
+                      backgroundColor: "#F44336",
+                      borderColor: "#F44336",
+                      data: dataSetB,
+                      fill: false,
+                    }, //put more data here
+                  ]
+              },
+              options: {
+                  responsive: true,
+                  title:{
+                      display: true,
+                      text: title
+                  },
+                  tooltips: {
+                      mode: 'index',
+                      intersect: false,
+                  },
+                  pointRadius: 20,
+                  scales: {
+                      xAxes: [{
+                          display: true,
+                          scaleLabel: {
+                              display: true,
+                          }
+                      }],
+                      yAxes: [{
+                          display: true,
+                          scaleLabel: {
+                              display: true,
+                              labelString: 'TOTAL ANNUAL ALLOWANCE'
+                          }
+                      }],
+                      gridLines: {
+                        lineWidth: 2
+                      }
+                  }
+              }
+          };
+      var ctx = document.getElementById("myChart").getContext('2d');
+      window.myLine = new Chart(ctx, config);
+  };
+</script>
+
+</html>

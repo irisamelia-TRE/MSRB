@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <!-- <script src="https://unpkg.com/vue"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/form.js"></script>
+    <script src="js/login.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link href="/css/styles.css" rel='stylesheet' type='text/css'>
+    <link href="/css/mayflowerstyles.css" rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+  <div class="output-navbar">
+  </div>
+  <div class="header-div">
+    <section>
+      <div class="ma__header__logo">
+        <div class="ma__site-logo">
+          <a href="/" title="Mass.gov home page">
+            <img src="http://mayflower.digital.mass.gov/assets/images/pilot-logo.png" alt="Mass.gov" width="164" height="75">
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+    <div class="login-wrapper">
+      <p>I understand that the information and/or calculations displayed on this site do not necessarily reflect the actual amount of my retirement allowance. The results provided by this calculator are approximations and should not be considered as
+          the final determination of my retirement benefit. They should not be relied upon for planning purposes.</p>
+
+      <input id="agree" type="checkbox" name="agree">
+      <label for="checkbox">I agree, continue filling out form</label>
+      <button type="button" id="btn--agree" class="btn--link">Submit</button>
+      <div id="error-adr">
+          <p>You must agree to continue.</p>
+      </div>
+    </div>
+</body>
+
+
+
+</html>

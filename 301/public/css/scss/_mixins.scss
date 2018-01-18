@@ -1,0 +1,74 @@
+// ======================
+// Breakpoints
+// ======================
+
+@mixin breakpoint($point) {
+  @if $point == tab   {
+    @media (min-width: 600px) { @content; }
+  }
+  @else if $point == desktop {
+    @media (min-width: 875px) { @content; }
+  }
+  @else if $point == mobile {
+    @media (min-width: 450px) {@content; }
+  }
+}
+
+// ======================
+// Transition
+// ======================
+
+@mixin transition($transition...) {
+    -moz-transition:    $transition;
+    -o-transition:      $transition;
+    -webkit-transition: $transition;
+    transition:         $transition;
+}
+
+// ======================
+// Transform
+// ======================
+
+@mixin transform($transforms) {
+     -moz-transform: $transforms;
+       -o-transform: $transforms;
+      -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+          transform: $transforms;
+}
+
+// ======================
+// Keyframes
+// ======================
+
+@mixin animation($animate...) {
+    $max: length($animate);
+    $animations: '';
+
+    @for $i from 1 through $max {
+        $animations: #{$animations + nth($animate, $i)};
+
+        @if $i < $max {
+            $animations: #{$animations + ", "};
+        }
+    }
+    -webkit-animation: $animations;
+    -moz-animation:    $animations;
+    -o-animation:      $animations;
+    animation:         $animations;
+}
+
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}

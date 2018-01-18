@@ -1,0 +1,14 @@
+.login-wrapper {
+  margin: 150px auto;
+  width: 70%;
+  text-align: center;
+}
+
+#error, #error-adr, #error-agree {
+  display: none;
+  color: red;
+}
+
+.login--opt-out {
+  font-size: .6em;
+}

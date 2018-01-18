@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <!-- <script src="https://unpkg.com/vue"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/form.js"></script>
+    <script src="js/login.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link href="/css/styles.css" rel='stylesheet' type='text/css'>
+    <link href="/css/mayflowerstyles.css" rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+  <div class="output-navbar">
+  </div>
+  <div class="header-div">
+    <section>
+      <div class="ma__header__logo">
+        <div class="ma__site-logo">
+          <a href="/" title="Mass.gov home page">
+            <img src="http://mayflower.digital.mass.gov/assets/images/pilot-logo.png" alt="Mass.gov" width="164" height="75">
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+    <div class="login-wrapper">
+        <p>Enter your Anticipated Date of Retirement below.</p>
+        <form>
+              <input id="adr" type="date" name="adr" placeholder="Date of Retirement">
+            <button type="button" id="btn--adr" class="btn--link">Submit</button>
+        </form>
+        <div id="error-adr">
+            <p>Please enter an anticipated date of retirement.</p>
+        </div>
+    </div>
+</body>
+
+
+
+</html>

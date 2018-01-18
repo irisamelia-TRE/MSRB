@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pension Calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/form.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link href="/css/styles.css" rel='stylesheet' type='text/css'>
+    <link href="/css/mayflowerstyles.css" rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <div class="output-navbar">
+    </div>
+    <div class="header-div">
+      <section>
+        <div class="ma__header__logo">
+          <div class="ma__site-logo">
+            <a href="/" title="Mass.gov home page">
+              <img src="http://mayflower.digital.mass.gov/assets/images/pilot-logo.png" alt="Mass.gov" width="164" height="75">
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  <div class="login-wrapper">
+      <h4>Welcome to the Retirement Calculator</h4>
+      <p>Are a government employee?</p>
+      <form action="/action_page.php">
+          <a href="login.html"><button type="button" class="btn--link">Yes</button></a>
+          <a href="form.html"><button type="button" class="btn--link">No</button></a>
+      </form>
+
+  </div>
+</body>
+<script>
+new Vue({
+    el: '#app',
+    data: {
+        message: 'Hello Vue!'
+    }
+});
+</script>
+</html>
