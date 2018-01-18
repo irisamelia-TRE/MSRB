@@ -1,0 +1,115 @@
+<div class="container top-margin">
+
+    <a class="glyphicon glyphicon-menu-left" href="#!/calculate/check"></a>
+
+    <div class="row center">
+        <div class="col-sm-3"> </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <h3>Option A - No Survivor Benefit</h3>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                      <label>Annual Allowance</label>
+                      <h3>${{model.answered.optionAAllowance}}</h3>
+                  </div>
+
+                  <div class="col-sm-6">
+                      <label>Monthly Allowance</label>
+                      <h3>${{model.answered.optionAAllowanceMonth}}</h3>
+                  </div>
+                </div>
+
+
+            </div>
+
+            <hr>
+
+
+            <div class="form-group">
+                <h3>Option B - Protects Your Annuity</h3>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                      <label>Annual Allowance</label>
+                      <h3>${{model.answered.optionBAllowance}}</h3>
+                  </div>
+
+                  <div class="col-sm-6">
+                      <label>Monthly Allowance</label>
+                      <h3>${{model.answered.optionBAllowanceMonth}}</h3>
+                  </div>
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="form-group"
+                 ng-show="model.data.beneficiaryBirthDate">
+                <h3>Option C - Joint Survivor Allowance</h3>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                      <label>Annual Allowance</label>
+                      <h3>${{model.answered.optionCAllowance}}</h3>
+                  </div>
+
+                  <div class="col-sm-6">
+                      <label>Monthly Allowance</label>
+                      <h3>${{model.answered.optionCAllowanceMonth}}</h3>
+                  </div>
+                </div>
+
+                <hr class="no-line">
+
+                <div class="row">
+                  <div class="col-sm-6">
+                      <label>Beneficiary Annual Allowance</label>
+                      <h3>${{model.answered.beneficiaryYearlyAllowance}}</h3>
+                  </div>
+
+                  <div class="col-sm-6">
+                      <label>Beneficiary Monthly Allowance</label>
+                      <h3>${{model.answered.beneficiaryMonthlyAllowance}}</h3>
+                  </div>
+                </div>
+            </div>
+
+            <a class="modal-label" data-toggle="modal" data-target=".bd-example-modal-lg">more information</a>
+
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <p>Option A - No Survivor Benefit</p>
+                        <p>Option A will provide you with your full retirement allowance in monthly
+                            payments as long as you live. However, all allowance payments stop when
+                            you die and no benefits are provided to survivors.</p>
+                        <p>Option B - Protects Your Annuity</p>
+                        <p>Option B provides a lifetime allowance to you that is approximately 1% to
+                            5% less per month than Option A.* The annuity portion of your allowance
+                            is reduced to allow a benefit for your beneficiary. Upon your death, your
+                            surviving beneficiary of record, or if there is no beneficiary living, the person
+                            or persons appearing in the judgment of the State Retirement Board to be
+                            entitled, will be paid the remaining balance of your accumulated total deductions
+                            from your annuity reserve account.</p>
+                        <p>Option C - Joint Survivor Allowance</p>
+                        <p>Option C, also known as the joint and last survivor allowance, provides you
+                            with a lifetime allowance approximately 7-15% less than that which you would
+                            receive under Option A. However, this reduction could be greater depending
+                            on the age difference between you and your beneficiary. Upon your death, your
+                            designated beneficiary will be paid a monthly allowance for the remainder of
+                            his or her life. The survivor benefit will be equal to two-thirds of the allowance
+                            that was being paid to you at the time of your death.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3"> </div>
+
+
+
+    </div>
+
+</div>

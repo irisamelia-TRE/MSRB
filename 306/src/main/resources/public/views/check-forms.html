@@ -1,0 +1,167 @@
+<div class="container top-margin">
+
+    <!--make sure this button takes user to actual previous page-->
+    <a class="glyphicon glyphicon-menu-left" href="#!/calculate/job"></a>
+
+    <div class="row center">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped"
+                     role="progressbar"
+                     aria-valuenow="60"
+                     aria-valuemin="0"
+                     aria-valuemax="100"
+                     style="width: 80%;">
+                </div>
+            </div>
+
+            <hr>
+
+            <h3>Check and Confirm Information</h3>
+            <hr>
+
+            <form ng-submit="model.submitData()">
+
+                <div class="form-group">
+
+                    <label for="first">First Name</label>
+                    <input type="text"
+                           class="form-control"
+                           id="first"
+                           placeholder="FirstName"
+                           ng-model="model.data.firstName"
+                           required>
+
+                    <hr>
+
+                    <label for="last">Last Name</label>
+                    <input type="text"
+                           class="form-control"
+                           id="last"
+                           placeholder="LastName"
+                           ng-model="model.data.lastName"
+                           required>
+
+                    <hr>
+
+                    <label for="dob">Date of Birth</label>
+                    <input type="date"
+                           class="form-control"
+                           id="dob"
+                           ng-model="model.data.birthDate"
+                           max="2200-01-01"
+                           min="1900-01-01"
+                           required>
+
+                    <hr>
+
+                    <label for="vet">Veteran</label>
+                    <select class="form-control"
+                            ng-model="model.data.isVeteran"
+                            id="vet">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+
+                    <hr>
+                    <label for="highestSalary">
+                        Highest Average Salary
+                    </label>
+                    <div class="input-group">
+                        <div class="input-group-addon">$</div>
+                        <input class="form-control"
+                               id="highestSalary"
+                               ng-model="model.data.highestAverageSalary"
+                               placeholder="Amount"
+                               min="1"
+                               max="2000000"
+                               required>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group" ng-show="model.data.beneficiaryBirthDate">
+                        <label for="bdob">Beneficiary Date of Birth</label>
+                        <input type="date"
+                               class="form-control"
+                               id="bdob"
+                               max="2200-01-01"
+                               min="1900-01-01"
+                               ng-model="model.data.beneficiaryBirthDate">
+                    </div>
+
+                    <hr>
+
+                    <div class="job-info"
+                         ng-repeat="job in model.data.jobs">
+
+                        <h3>{{job.name}}</h3>
+                        <hr>
+
+                        <label for="group">Group Number</label>
+                        <select class="form-control"
+                                ng-model="job.groupNumber"
+                                id="group">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="4">4</option>
+                        </select>
+
+                        <hr>
+
+                        <label for="jobStart">Job Start Date</label>
+                        <input class="form-control"
+                               type="date"
+                               id="jobStart"
+                               ng-model="job.startDate"
+                               max="2200-01-01"
+                               min="1900-01-01"
+                               required>
+
+                        <hr>
+
+                        <label for="jobEnd">Job End Date</label>
+                        <input class="form-control"
+                               type="date"
+                               id="jobEnd"
+                               ng-model="job.endDate"
+                               max="2200-01-01"
+                               min="1900-01-01"
+                               required>
+
+                        <hr>
+
+                        <a class="btn btn-info"
+                           ng-click="model.saveJob(job)">
+                            Update Job
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="error-alerts"
+                     ng-if="model.error">
+                       Error: {{model.error}}
+                </div>
+
+                <button class="btn btn-default"
+                        type="submit"
+                        value="Submit">
+                    Estimate My Pension
+                </button>
+
+                <hr>
+            </form>
+
+
+        </div>
+        <div class="col-sm-2"></div>
+
+
+    </div>
+
+</div>

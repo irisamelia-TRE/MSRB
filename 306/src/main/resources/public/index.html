@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Pension Calculator</title>
+
+    <!--Import AngularJS-->
+    <!--<script type="text/javascript" src="../lib/angular-route.min.js"></script>-->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <!--NgRoute-->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.js"></script>
+
+    <script type="text/javascript" src="https://code.angularjs.org/1.6.5/angular-animate.js"></script>
+
+    <!--UI-Bootstrap-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.js"></script>
+
+
+    <script type="text/javascript" src="app.js"></script>
+
+    <script type="text/javascript" src="config.js"></script>
+
+
+    <link rel="stylesheet" href="style.css">
+
+    <!--Controllers-->
+    <script src="controllers/form-basic.controller.js"></script>
+
+</head>
+
+<body ng-app="Main" ng-controller="formController as model">
+
+
+<header class="ma__header">
+    <div class="ma__header__backto">
+        <a class="ma__header__skip-nav" href="#main-content">skip to main content</a>
+    </div>
+    <div class="ma__header__container">
+        <div class="ma__header__logo">
+            <a href="">
+                <img src="http://mayflower.digital.mass.gov/assets/images/pilot-logo.png" width="164" height="75">
+            </a>
+        </div>
+    </div>
+</header>
+
+
+<div ng-view>
+</div>
+
+</body>
+</html>

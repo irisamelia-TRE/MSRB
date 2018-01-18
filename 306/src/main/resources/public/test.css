@@ -1,0 +1,59 @@
+/**
+ * Created by lucia on 11/19/2017.
+ */
+.ma__header {
+    background-color: #f2f2f2;
+    padding-top: 43px;
+    position: relative;
+}
+
+.ma__header__backto {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1320px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: block;
+    height: 0;
+    position: relative;
+    transition: left 0.5s ease;
+    z-index: 91;
+}
+
+.ma__header__skip-nav:not(:focus) {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    width: 240px;
+}
+
+.ma__header__container {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1320px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 0;
+    height: 100px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.ma__header__logo {
+    display: inline-block;
+    float: none;
+    vertical-align: middle;
+    width: 150px;
+}
+
+.ma__header__search {
+    display: inline-block;
+    text-align: right;
+    vertical-align: middle;
+    width: calc(100% - 150px);
+}

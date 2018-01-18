@@ -1,0 +1,33 @@
+<div class="ma__page-header__content">
+    <h2 class="ma__page-header__title">Pension Calculator</h2>
+</div>
+<div class="container top-margin">
+
+
+    <div class="row center">
+        <div class="col-xs-12">
+            <b>Please Read and Agree Before Continuing</b>
+            <p>I understand that the information and/or calculations displayed on this site do not necessarily
+            reflect the actual amount of my retirement allowance.
+            The results provided by this calculator are approximations and should not be considered as
+            the final determination of my retirement benefit. They should not be relied upon for planning purposes.</p>
+
+            <div class="checkbox center">
+                <label>
+                    <input ng-model="$root.agreedToDisclaimer"
+                           type="checkbox">I agree
+                </label>
+            </div>
+        </div>
+
+        <div class="col-xs-12 ">
+
+            <button class="btn btn-default"
+                    ng-disabled="!$root.agreedToDisclaimer"
+                    onclick="location.href='#!/calculate/basic'">
+                Estimate Pension
+            </button>
+        </div>
+
+    </div>
+</div>
