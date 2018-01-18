@@ -1,0 +1,26 @@
+@import './defs.scss';
+
+.retirement-graph {
+  padding: 1px 1px 1px 1px;
+  height: 100%;
+  width: 100%;
+}
+
+.pension-path {
+  fill: $c-theme-primary-2;
+}
+
+.projected-path {
+  stroke-dasharray: 5, 5;
+  stroke: black;
+}
+
+.pension-label {
+  font-size: 1.75rem;
+  font-family: $font-family;
+}
+
+:global g.tick text {
+  font-size: 1.75rem;
+  font-family: $font-family;
+}

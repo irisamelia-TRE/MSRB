@@ -1,0 +1,82 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.7.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath 'se.transmode.gradle:gradle-docker:1.2'
+	}
+}
+
+project('webpackutils') {
+	task cleanJSBuilt(type: Delete) {
+		delete fileTree("../src/main/resources/static/built") {
+        		include '**/*'
+    		}
+	}
+
+	task webpack(type: Exec, dependsOn: cleanJSBuilt) {
+    		commandLine "../node_modules/.bin/webpack"
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'docker' 
+
+bootRun {
+		addResources = true
+}
+
+docker {
+		baseImage "openjdk:8"
+}
+
+group = 'com.team303'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+task copyJarToDockerDir(type: Copy){
+	dependsOn 'build'
+	from "$projectDir/build/$libsDirName/$archivesBaseName-$version" + ".jar"
+	into "$projectDir/build/docker/"
+}
+
+task dockerImage(type: Docker) {
+	dependsOn 'copyJarToDockerDir'
+	applicationName = "pensioncalculator"
+		runCommand "apt-get update"
+		runCommand "apt-get install -y postgresql postgresql-contrib"
+		exposePort(8080)
+		addFile("$archivesBaseName-$version" + ".jar", "/mnt/")
+		List<String> commands = new ArrayList<String>()
+		commands.add("java")
+		commands.add("-jar")
+		commands.add("/mnt/$archivesBaseName-$version" + ".jar")
+		entryPoint = commands
+}
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework:spring-web')
+	compile('org.springframework:spring-core')
+	compile('org.springframework.boot:spring-boot-devtools')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('org.postgresql:postgresql')
+	compile('com.fasterxml.jackson.core:jackson-annotations')
+	compile('com.fasterxml.jackson.core:jackson-core')
+	compile('com.fasterxml.jackson.core:jackson-databind')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+task bootRunWithReload(dependsOn: ['webpackutils:webpack', 'bootRun'])

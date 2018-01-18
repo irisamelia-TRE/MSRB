@@ -1,0 +1,8 @@
+@import './defs.scss';
+
+.number-input {
+  border: none;
+  border-bottom: $underline-border;
+  text-align: center;
+  width: 7em;
+}

@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                dir('calculator') {
+                    echo 'Building..'
+                    sh 'npm run clean'
+		                sh 'npm -v'
+                    sh 'npm install'
+                    sh 'npm run -s build'
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                dir('calculator') {
+                    echo 'Testing..'
+                    sh 'npm run -s test'
+                    junit 'junit/*.xml'
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+                echo "My branch is: ${env.BRANCH_NAME}"
+                ifOnMaster()
+            }
+		
+        }
+    }
+}
+def ifOnMaster() {
+    if (env.BRANCH_NAME == 'master')
+        sshagent(credentials: ['brek']){
+                                sh 'ls ./calculator/'
+                                sh "scp -o StrictHostKeyChecking=no -r ./calculator/dist/ ubuntu@128.31.25.118:/home/ubuntu/305/calculator/dist"
+        }
+}

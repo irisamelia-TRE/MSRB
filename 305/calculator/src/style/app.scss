@@ -1,0 +1,65 @@
+@import './fonts.scss';
+@import './defs.scss';
+
+html {
+  box-sizing: border-box;
+}
+
+*, *::after, *::before {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "Texta", "Helvetica", "Arial", "sans-serif";
+  font-weight: 400;
+  margin: 0;
+}
+
+input, select, textarea, button {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+:global div#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+input {
+  color: $c-theme-primary-3;
+  border: 2px solid;
+  border-color: $c-gray-dcdcdc;
+  padding: 0 18px;
+}
+
+:global .visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+p, ul, ol {
+  margin-top: 0;
+}
+
+button, input {
+  line-height: 1.15;
+}
+
+

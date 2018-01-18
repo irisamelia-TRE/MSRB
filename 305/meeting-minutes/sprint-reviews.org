@@ -1,0 +1,12 @@
+* 10/6/17 Sprint Review
+- We should execute better peer reviewing practices
+- We have questions/clarifications about client
+- make better documentation folders surrounding project docs
+- use smart commits
+- no challenges thus far
+- communication is going well
+** Next Sprint
+- Next Version UI
+- Probably a wireframe
+- UML diagrams
+- Add husky email to github

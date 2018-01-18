@@ -1,0 +1,47 @@
+@import './defs.scss';
+
+.main {
+  font-size: 1.375rem;
+  line-height: 1.5;
+  padding-top: 18px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.form-section {
+  max-width: $max-width;
+  width: 40%;
+}
+
+.graph-section {
+  max-width: $max-width;
+  width: 40%;
+}
+
+.help-tip {
+  text-align: center;
+  background-color: #43956f;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  line-height: 26px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.help-tip:before {
+  content:'?';
+  font-weight: bold;
+  color:#fff;
+}
+
+.inline-p {
+  display: inline;
+  margin-right: 10px;
+}
+
+.div-paragraph {
+  margin-bottom: 1em;
+}

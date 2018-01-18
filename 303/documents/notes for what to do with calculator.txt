@@ -1,0 +1,36 @@
+
+Ideas on what we could do with the calculator:
+1. Improve the UI and UX
+--- Get rid of all of the drop down boxes
+2. Possibly pull user information for users that they have in their DBs instead of asking users to enter it all again
+
+3. Increase accuracy of calculator
+--- Accurate for more people
+--- More accurate for the existing people
+
+4. History of what people typed in
+5. Deeplinks so people can bookmark and link to specific entries
+6. Common configurations and recommendations
+
+7. Explain concepts more and improve the english on the site
+--- What do groups mean?
+--- Change highest 36 consecutive months to say 3 years
+
+8. Make the code module
+--- Split up the code so the functions that work with the DOM and the code that does the math are totally different
+
+9. Use warning shown on the page instead of alerts. Alerts are bad for many reasons - JS blockers, annoying UI, etc
+
+
+Notes for the code itself:
+--- It would probably be easier to call into the existing code that it would be to re-write all of the existing code. If possible lets do that, instead of trying to understand all of the existing logic.
+
+
+
+Bugs in the existing system:
+1. FIX THE TYPO in the error message THANKS CHRISTINE
+2. the button to use the current date goes away on mac on chrome if you click it 
+
+
+
+

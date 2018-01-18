@@ -1,0 +1,51 @@
+
+How to set up nginx on server I used this tutorial:
+	-https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-16-04
+
+To run the code server-side as a dev-server use this tutorial:
+	- https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04
+	- Note: Skip to "Install PM2" section
+	- Note: instead of running the command: $ pm2 start hello.js
+		Run this command instead: $ pm2 start npm -- run dev
+
+The file /etc/nginx/sites-available/default looks like this:
+
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	root /home/ubuntu/305/calculator/dist;
+
+	# Add index.php to the list if you are using PHP
+	index index.html index.htm index.nginx-debian.html;
+
+	server_name 128.31.25.118;
+	
+	location / {
+        	#proxy_pass http://localhost:8080;
+        	#proxy_http_version 1.1;
+        	#proxy_set_header Upgrade $http_upgrade;
+        	#proxy_set_header Connection 'upgrade';
+        	#proxy_set_header Host $host;
+        	#proxy_cache_bypass $http_upgrade;
+		try_files $uri $uri/ =404;
+    	}	
+
+	# pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+	#
+	#location ~ \.php$ {
+	#	include snippets/fastcgi-php.conf;
+	#
+	#	# With php7.0-cgi alone:
+	#	fastcgi_pass 127.0.0.1:9000;
+	#	# With php7.0-fpm:
+	#	fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+	#}
+
+	# deny access to .htaccess files, if Apache's document root
+	# concurs with nginx's one
+	#
+	#location ~ /\.ht {
+	#	deny all;
+	#}
+}
